@@ -6,19 +6,15 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      # ホストのDockerソケットをマウントしてDocker in Dockerを実現
-      - /var/run/docker.sock:/var/run/docker.sock
       # 現在のディレクトリをコンテナの/home/vscode/projectにマウント
       - .:/home/vscode/project
       # 設定ファイル用のマウント (必要に応じて追加)
       # - ./config:/config
       # - ./tools:/tools
-    # tiniを使用して適切にプロセスを管理
+      # tiniを使用して適切にプロセスを管理
     init: true
-    # コンテナ特権モード (Docker in Dockerに必要)
-    privileged: true
     # 環境変数の設定
     environment:
       - NODE_ENV=development
     # 明示的なコマンドで常駐させる
-    command: ["/bin/bash", "-c", "tail -f /dev/null"] 
+    command: [ "/bin/bash", "-c", "tail -f /dev/null" ]

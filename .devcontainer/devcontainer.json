@@ -40,17 +40,11 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-vscode.vscode-typescript-next",
-    "ms-azuretools.vscode-docker",
     "ms-vscode.js-debug"
   ],
 
   // コンテナ作成後のコマンド実行
   "postCreateCommand": "cd /home/vscode/project/extensions_src && npm install",
-
-  // Docker in Dockerを有効にする
-  "runArgs": [
-    "--init"
-  ],
 
   // ユーザーをroot以外に設定
   "remoteUser": "vscode"
