@@ -2,7 +2,7 @@
   "name": "VSCode Extension Development",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "vscode",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/home/vscode/project/extensions_src",
 
   // VSCodeの設定
   "settings": {
@@ -11,6 +11,27 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
+    },
+    // 最初に開くディレクトリを設定
+    "explorer.autoReveal": true,
+    "workbench.startupEditor": "none"
+  },
+
+  // コンテナ起動時のディレクトリ
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/project,type=bind,consistency=cached",
+  "overrideCommand": true,
+  // 環境セットアップスクリプトを実行
+  "onCreateCommand": "bash /home/vscode/project/scripts/setup-workspace.sh",
+  
+  // extensions_srcを初期ディレクトリとして設定
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "explorer.compactFolders": false,
+        "terminal.integrated.cwd": "/home/vscode/project/extensions_src",
+        "explorer.fileNesting.enabled": true
+      },
+      "remote.containers.defaultExtensions": ["ms-vscode.vscode-typescript-next"]
     }
   },
 
@@ -24,7 +45,7 @@
   ],
 
   // コンテナ作成後のコマンド実行
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "cd /home/vscode/project/extensions_src && npm install",
 
   // Docker in Dockerを有効にする
   "runArgs": [

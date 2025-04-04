@@ -53,3 +53,4 @@ dist/
 # 外部拡張機能ソースディレクトリの中身
 /extensions_src/*
 !/extensions_src/README.md 
+!/extensions_src/.cursor/
