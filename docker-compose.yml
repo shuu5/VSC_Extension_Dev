@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vscode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # ホストのDockerソケットをマウントしてDocker in Dockerを実現
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 現在のディレクトリをコンテナの/workspaceにマウント
+      - .:/workspace
+    # コンテナが終了してもすぐに削除されないようにする
+    command: sleep infinity
+    # コンテナ特権モード (Docker in Dockerに必要)
+    privileged: true
+    # ホストネットワークを使用
+    network_mode: host
+    # 環境変数の設定
+    environment:
+      - NODE_ENV=development 
