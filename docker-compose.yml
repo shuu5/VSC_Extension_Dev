@@ -10,6 +10,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # 現在のディレクトリをコンテナの/workspaceにマウント
       - .:/workspace
+      # 外部拡張機能ソースファイル用のディレクトリをマウント
+      - ./extensions_src:/workspace/extensions_src
     # コンテナが終了してもすぐに削除されないようにする
     command: sleep infinity
     # コンテナ特権モード (Docker in Dockerに必要)

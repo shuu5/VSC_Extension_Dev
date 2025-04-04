@@ -59,6 +59,44 @@ vsce package
 
 これにより、配布可能な.vsix ファイルが作成されます。
 
+## 外部拡張機能ソースの開発
+
+ローカルに既にダウンロード済みの拡張機能ソースコードを使って開発したい場合は、`extensions_src` ディレクトリを利用できます。
+
+### 外部拡張機能の配置
+
+1. ローカルホスト上の `extensions_src` ディレクトリに既存の拡張機能ソースコードを配置します。
+2. DevContainerを起動すると、このディレクトリは自動的にコンテナ内の `/workspace/extensions_src` にマウントされます。
+
+### 外部拡張機能の開発
+
+```bash
+# コンテナ内で外部拡張機能のディレクトリに移動
+cd /workspace/extensions_src/[拡張機能名]
+
+# 依存関係のインストール
+npm install
+
+# 拡張機能のビルド
+npm run compile
+
+# 拡張機能のテスト実行
+npm run test
+```
+
+### 複数の拡張機能の管理
+
+複数の拡張機能を管理する場合は、以下のディレクトリ構造を推奨します：
+
+```
+extensions_src/
+├── extension-a/  # 拡張機能Aのソースコード
+├── extension-b/  # 拡張機能Bのソースコード
+└── ...
+```
+
+各拡張機能のディレクトリ内で個別に開発作業を行います。
+
 ## Docker in Docker の利用
 
 DevContainer内からDockerコマンドを実行できます：
